@@ -1,8 +1,8 @@
 # API 快照
 
-> 随版本更新。v0.2.0 快照如下；新版本发布后同步替换。
+> 随版本更新。v0.3.0 快照如下；新版本发布后同步替换。
 
-## v0.2.0
+## v0.3.0
 
 ### TB 接口
 
@@ -54,6 +54,20 @@ func JSONEqual(t TB, got, want any)
 - 接受 string / []byte；忽略键序与空白；
 - 数字按数值精确比较（`1` 与 `1.0`、`1e5` 与 `100000` 相等）；
 - 非法 JSON、多余内容或不支持的类型视为断言误用（Fatalf）。
+
+### 集合/字符串断言
+
+```go
+func Contains(t TB, container, elem any)
+func NotContains(t TB, container, elem any)
+func Subset(t TB, list, sublist any)
+func ElementsMatch(t TB, listA, listB any)
+```
+
+- `Contains`：字符串检查子串，切片/数组检查元素，map 检查键；
+- `Subset`：list 包含 sublist 全部元素（多重性一致，顺序无关）；
+- `ElementsMatch`：两个集合元素一致（顺序无关、多重性一致）；
+- 不支持的容器类型视为断言误用（Fatalf）。
 
 ### 语义
 
