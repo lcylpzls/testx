@@ -27,6 +27,8 @@ jobs:
         run: go vet ./...
 
       - name: Staticcheck
+        env:
+          GOTOOLCHAIN: auto
         run: |
           go install honnef.co/go/tools/cmd/staticcheck@2026.1
           staticcheck ./...
@@ -128,6 +130,8 @@ jobs:
           check-latest: true
 
       - name: Govulncheck
+        env:
+          GOTOOLCHAIN: auto
         run: |
           go install golang.org/x/vuln/cmd/govulncheck@latest
           govulncheck ./...
