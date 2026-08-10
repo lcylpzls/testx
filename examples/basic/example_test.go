@@ -4,6 +4,7 @@ import (
 	"errors"
 	"testing"
 
+	"github.com/lcylpzls/errx"
 	"github.com/lcylpzls/testx"
 )
 
@@ -16,4 +17,9 @@ func TestExample(t *testing.T) {
 	testx.Error(t, err)
 	testx.ErrorIs(t, err, err)
 	testx.Len(t, []int{1, 2, 3}, 3)
+
+	e := errx.NewCode("EXAMPLE_FAIL", "示例失败").WithField("id", 1)
+	testx.ErrCode(t, e, "EXAMPLE_FAIL")
+	testx.ErrFields(t, e, errx.KV{Key: "id", Value: 1})
+	testx.JSONEqual(t, `{"a":1}`, `{"a":1.0}`)
 }

@@ -21,7 +21,7 @@ func TestGreeting(t *testing.T) {
 - 核心断言：Equal / NotEqual / True / False / Nil / NotNil / Error /
   NoError / ErrorIs / Empty / NotEmpty / Len；
 - errx 结构化断言：错误码 / 分类 / 字段（v0.2.0 起）；
-- JSON 语义相等（v0.2.0 起）；
+- JSON 语义相等：忽略键序与空白，数字按数值精确比较（v0.2.0 起）；
 - 集合/字符串断言与表格驱动（v0.3.0 / v0.4.0 起）；
 - 输出捕获、临时环境与并发辅助（v0.5.0 起）；
 - 失败消息全部简体中文，断言基于可替换的 `TB` 接口。

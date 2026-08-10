@@ -5,7 +5,7 @@
 | 版本 | 内容 | 状态 |
 | --- | --- | --- |
 | v0.1.0 | 核心断言：Equal/NotEqual/True/False/Nil/NotNil/Error/NoError/ErrorIs/Empty/NotEmpty/Len | 进行中 |
-| v0.2.0 | errx 断言（ErrCode/ErrKind/ErrFields）与 JSON 语义相等 | 计划 |
+| v0.2.0 | errx 断言（ErrCode/ErrKind/ErrFields）与 JSON 语义相等 | 完成 |
 | v0.3.0 | 集合/字符串断言：Contains/NotContains/Subset/ElementsMatch | 计划 |
 | v0.4.0 | 表格驱动 RunCases、Panics/NotPanics、数值近似 Approx | 计划 |
 | v0.5.0 | 捕获/临时环境/并发辅助与基准 | 计划 |

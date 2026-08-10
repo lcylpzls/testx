@@ -14,3 +14,14 @@ func FuzzFormatValue(f *testing.F) {
 		_ = formatValue(input)
 	})
 }
+
+// FuzzJSONEqual 验证任意 JSON 输入下语义比较不 panic。
+func FuzzJSONEqual(f *testing.F) {
+	f.Add("{}", "{}")
+	f.Add(`{"a":1}`, `{"a":1.0}`)
+	f.Add(`[1,2]`, `[1,2]`)
+	f.Add("", "x")
+	f.Fuzz(func(t *testing.T, a, b string) {
+		JSONEqual(&fakeTB{}, a, b)
+	})
+}

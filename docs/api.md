@@ -1,8 +1,8 @@
 # API 快照
 
-> 随版本更新。v0.1.0 快照如下；新版本发布后同步替换。
+> 随版本更新。v0.2.0 快照如下；新版本发布后同步替换。
 
-## v0.1.0
+## v0.2.0
 
 ### TB 接口
 
@@ -32,6 +32,28 @@ func Empty(t TB, v any)
 func NotEmpty(t TB, v any)
 func Len(t TB, v any, want int)
 ```
+
+### errx 断言
+
+```go
+func ErrCode(t TB, err error, code errx.Code)
+func ErrKind(t TB, err error, kind errx.Kind)
+func ErrFields(t TB, err error, kvs ...errx.KV)
+```
+
+- `ErrCode` 沿错误链匹配错误码（errx.Is）；
+- `ErrKind` 取错误链第一个结构化错误的分类（errx.KindOf）；
+- `ErrFields` 要求结构化错误包含全部指定键值对（顺序无关）。
+
+### JSON 语义相等
+
+```go
+func JSONEqual(t TB, got, want any)
+```
+
+- 接受 string / []byte；忽略键序与空白；
+- 数字按数值精确比较（`1` 与 `1.0`、`1e5` 与 `100000` 相等）；
+- 非法 JSON、多余内容或不支持的类型视为断言误用（Fatalf）。
 
 ### 语义
 
