@@ -1,4 +1,4 @@
-package testx
+package core
 
 import "testing"
 
@@ -20,4 +20,8 @@ func TestCompareAssertionsFailures(t *testing.T) {
 	checkRequireFails(t, func(t *fakeTB) { RequireLessOrEqual(t, 3, 2) })
 	checkRequireFails(t, func(t *fakeTB) { RequireGreater(t, "a", "b") })
 	checkRequireFails(t, func(t *fakeTB) { RequireGreater(t, 1, "b") })
+	checkRequireFails(t, func(t *fakeTB) { RequireGreaterOrEqual(t, "a", 1) })
+	checkRequireFails(t, func(t *fakeTB) { RequireLess(t, "a", 1) })
+	checkRequireFails(t, func(t *fakeTB) { RequireLessOrEqual(t, "a", 1) })
+	checkRequireFails(t, func(t *fakeTB) { RequireGreater(t, nil, 1) })
 }

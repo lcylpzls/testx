@@ -1,4 +1,4 @@
-package testx
+package core
 
 import "github.com/lcylpzls/errx"
 

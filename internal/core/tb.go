@@ -1,4 +1,4 @@
-package testx
+package core
 
 // TB 是断言所需的最小测试接口。
 // *testing.T 天然满足；库自身测试可用替身验证失败路径。

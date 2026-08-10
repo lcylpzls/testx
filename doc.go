@@ -1,11 +1,3 @@
-// Package testx 是轻量、零魔法的测试断言与辅助库。
-//
-// 核心断言基于可替换的 TB 接口（Helper/Errorf/Fatalf 子集），
-// *testing.T 天然满足；失败消息统一使用简体中文。
-//
-// 典型用法：
-//
-//	func TestGreeting(t *testing.T) {
-//	    testx.Equal(t, greeting("小明"), "你好，小明！")
-//	}
+// Package testx 提供家族统一的测试断言基座（通用断言、errx 断言、集合、JSON、恐慌、捕获辅助）。
+// 实现主体位于 internal/core，本包仅暴露稳定公开 API。
 package testx
