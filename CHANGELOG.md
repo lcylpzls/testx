@@ -1,5 +1,18 @@
 # 更新日志
 
+## [v1.2.0] - 2026-08-10
+
+### 新增
+
+- `Require*` 致命断言变体：所有断言均提供 Require 版本（失败时
+  立即 `Fatalf` 终止测试），与既有非致命断言并存；
+- 提供 `RequireEqual/RequireNoError/RequireErrCode` 等 24 个变体，
+  覆盖基础断言、errx 断言、JSON、集合、恐慌与数值近似。
+
+### 质量
+
+- 根包语句覆盖率 100%；race / vet / staticcheck / fuzz / govulncheck 全绿。
+
 ## [v1.1.0] - 2026-08-10
 
 ### 变更

@@ -2,6 +2,40 @@
 
 > v1.0.0 起为 API 冻结快照；破坏性变更需提升主版本。
 
+## v1.2.0
+
+### Require 致命断言
+
+所有断言均提供 `Require*` 变体：失败时立即调用 `Fatalf` 终止测试，
+适合前置校验、测试辅助函数与不允许继续执行的场景。
+
+```go
+func RequireEqual(t TB, got, want any)
+func RequireNotEqual(t TB, got, want any)
+func RequireTrue(t TB, v bool)
+func RequireFalse(t TB, v bool)
+func RequireNil(t TB, v any)
+func RequireNotNil(t TB, v any)
+func RequireError(t TB, err error)
+func RequireNoError(t TB, err error)
+func RequireErrorIs(t TB, err, target error)
+func RequireEmpty(t TB, v any)
+func RequireNotEmpty(t TB, v any)
+func RequireLen(t TB, v any, want int)
+func RequireErrCode(t TB, err error, code errx.Code)
+func RequireErrKind(t TB, err error, kind errx.Kind)
+func RequireErrFields(t TB, err error, kvs ...errx.KV)
+func RequireJSONEqual(t TB, got, want any)
+func RequireContains(t TB, container, elem any)
+func RequireNotContains(t TB, container, elem any)
+func RequireSubset(t TB, list, sublist any)
+func RequireElementsMatch(t TB, listA, listB any)
+func RequirePanics(t TB, fn func())
+func RequirePanicsWithValue(t TB, want any, fn func())
+func RequireNotPanics(t TB, fn func())
+func RequireApprox(t TB, got, want, tolerance float64)
+```
+
 ## v1.0.0
 
 ### TB 接口
