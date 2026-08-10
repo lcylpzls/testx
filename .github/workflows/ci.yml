@@ -131,7 +131,9 @@ jobs:
 
       - name: Govulncheck
         env:
-          GOTOOLCHAIN: auto
+          # Go 1.21 系列已 EOL，标准库存在 GO-2025-3750（修复于 1.23.10），
+          # 安全扫描使用 1.25+ 工具链；模块语言版本仍保持 1.21.0。
+          GOTOOLCHAIN: 'go1.25.0+auto'
         run: |
           go install golang.org/x/vuln/cmd/govulncheck@latest
           govulncheck ./...
