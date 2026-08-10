@@ -1,6 +1,7 @@
 package testx
 
 import (
+	"math"
 	"strings"
 	"testing"
 )
@@ -51,6 +52,11 @@ func TestPanicsWithValue(t *testing.T) {
 	if !tb2.failed() {
 		t.Fatal("未 panic 应失败")
 	}
+	tb3 := &fakeTB{}
+	Panics(tb3, func() { panic(nil) })
+	if tb3.failed() {
+		t.Fatalf("panic(nil) 应视为已触发：%v", tb3.errors)
+	}
 }
 
 func TestNotPanics(t *testing.T) {
@@ -78,13 +84,33 @@ func TestApprox(t *testing.T) {
 	if len(tb2.fatals) != 1 {
 		t.Fatalf("负容差应 Fatalf：%v", tb2.fatals)
 	}
+	tb3 := &fakeTB{}
+	Approx(tb3, NaN(), 1.0, 0.1)
+	if !tb3.failed() {
+		t.Fatal("NaN 实际值应失败")
+	}
+	tb4 := &fakeTB{}
+	Approx(tb4, 1.0, NaN(), 0.1)
+	if !tb4.failed() {
+		t.Fatal("NaN 期望值应失败")
+	}
 }
 
 func TestRecoverPanic(t *testing.T) {
-	if got := recoverPanic(func() { panic("x") }); got != "x" {
+	got, panicked := recoverPanic(func() { panic("x") })
+	if got != "x" || !panicked {
 		t.Fatalf("recoverPanic 应返回 panic 值：%v", got)
 	}
-	if got := recoverPanic(func() {}); got != nil {
+	got, panicked = recoverPanic(func() {})
+	if got != nil || panicked {
 		t.Fatalf("recoverPanic 未 panic 应返回 nil：%v", got)
 	}
+	if _, panicked := recoverPanic(func() { panic(nil) }); !panicked {
+		t.Fatal("panic(nil) 应标记为已触发")
+	}
+}
+
+// NaN 返回 float64 的 NaN 值。
+func NaN() float64 {
+	return math.NaN()
 }

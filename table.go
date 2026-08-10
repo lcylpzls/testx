@@ -22,7 +22,7 @@ func RunCases[T any](t *testing.T, name string, cases []T, fn func(t *testing.T,
 // Panics 断言 fn 触发 panic。
 func Panics(t TB, fn func()) {
 	t.Helper()
-	if recoverPanic(fn) == nil {
+	if _, panicked := recoverPanic(fn); !panicked {
 		t.Errorf("期望触发 panic，实际正常返回")
 	}
 }
@@ -30,8 +30,8 @@ func Panics(t TB, fn func()) {
 // PanicsWithValue 断言 fn 触发 panic 且 panic 值与 want 深度相等。
 func PanicsWithValue(t TB, want any, fn func()) {
 	t.Helper()
-	got := recoverPanic(fn)
-	if got == nil {
+	got, panicked := recoverPanic(fn)
+	if !panicked {
 		t.Errorf("期望触发 panic，实际正常返回")
 		return
 	}
@@ -43,7 +43,7 @@ func PanicsWithValue(t TB, want any, fn func()) {
 // NotPanics 断言 fn 不触发 panic。
 func NotPanics(t TB, fn func()) {
 	t.Helper()
-	if got := recoverPanic(fn); got != nil {
+	if got, panicked := recoverPanic(fn); panicked {
 		t.Errorf("期望不触发 panic，实际 panic 值 %s", formatValue(got))
 	}
 }
@@ -55,17 +55,24 @@ func Approx(t TB, got, want, tolerance float64) {
 		t.Fatalf("Approx 的容差必须非负，得到 %v", tolerance)
 		return
 	}
+	if math.IsNaN(got) || math.IsNaN(want) {
+		t.Errorf("Approx 不支持 NaN：实际 %v，期望 %v", got, want)
+		return
+	}
 	if math.Abs(got-want) > tolerance {
 		t.Errorf("期望 %v 与 %v 的差不超过 %v，实际差 %v",
 			got, want, tolerance, math.Abs(got-want))
 	}
 }
 
-// recoverPanic 执行 fn 并返回 panic 值；未 panic 时返回 nil。
-func recoverPanic(fn func()) (recovered any) {
+// recoverPanic 执行 fn 并返回 panic 值与是否触发 panic。
+func recoverPanic(fn func()) (recovered any, panicked bool) {
 	defer func() {
-		recovered = recover()
+		if r := recover(); r != nil {
+			recovered = r
+			panicked = true
+		}
 	}()
 	fn()
-	return nil
+	return nil, false
 }

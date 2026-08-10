@@ -23,16 +23,20 @@ func captureOutput(stream **os.File, fn func()) string {
 	r, w, _ := os.Pipe()
 	old := *stream
 	*stream = w
+	done := make(chan string, 1)
+	go func() {
+		data, _ := io.ReadAll(r)
+		done <- string(data)
+	}()
 	defer func() {
 		*stream = old
+		w.Close()
+		r.Close()
 	}()
-	defer w.Close()
 	fn()
 	*stream = old
 	w.Close()
-	data, _ := io.ReadAll(r)
-	r.Close()
-	return string(data)
+	return <-done
 }
 
 // TempEnv 设置环境变量，并在测试结束时恢复原值（不存在的键恢复为未设置）。

@@ -1,5 +1,26 @@
 # 更新日志
 
+## [v0.6.0] - 2026-08-10
+
+### 修复
+
+- 输出捕获改为边写边读：超过管道缓冲区（64 KiB）的输出不再阻塞；
+- `panic(nil)` 与未 panic 现在可区分（`PanicsWithValue(nil)` 可通过）；
+- `Approx` 对 NaN 实际值/期望值明确失败。
+
+### 改进
+
+- 新增 `docs/final-review.md` 1.0 候选终审清单与 Issue 模板；
+- README 增加 CI 徽章。
+
+### 结论
+
+- testx 达到 1.0 候选标准；**v1.0.0 是否发布由维护者决定**。
+
+### 质量
+
+- 根包语句覆盖率 100%；race / vet / staticcheck / fuzz / govulncheck 全绿。
+
 ## [v0.5.0] - 2026-08-10
 
 ### 新增

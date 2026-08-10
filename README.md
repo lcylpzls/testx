@@ -5,6 +5,7 @@
 
 [![Go Version](https://img.shields.io/badge/Go-%3E%3D1.26-00ADD8?style=flat&logo=go)](https://go.dev/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![CI](https://github.com/lcylpzls/testx/actions/workflows/ci.yml/badge.svg)](https://github.com/lcylpzls/testx/actions/workflows/ci.yml)
 
 ## 快速开始
 
@@ -35,6 +36,7 @@ func TestGreeting(t *testing.T) {
 - [docs/design.md](docs/design.md) — 设计
 - [docs/architecture.md](docs/architecture.md) — 架构
 - [docs/api.md](docs/api.md) — API 快照
+- [docs/final-review.md](docs/final-review.md) — 1.0 候选终审
 - [docs/roadmap.md](docs/roadmap.md) — 路线图
 
 ## License

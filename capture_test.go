@@ -45,6 +45,20 @@ func TestCaptureStdoutPanic(t *testing.T) {
 	}
 }
 
+func TestCaptureStdoutLargeOutput(t *testing.T) {
+	// 超出管道缓冲区（64 KiB）的输出不应阻塞。
+	data := make([]byte, 256*1024)
+	for i := range data {
+		data[i] = 'a'
+	}
+	got := CaptureStdout(func() {
+		fmt.Print(string(data))
+	})
+	if len(got) != len(data) {
+		t.Fatalf("大输出捕获不完整：%d != %d", len(got), len(data))
+	}
+}
+
 func TestTempEnv(t *testing.T) {
 	key := "TESTX_TEMP_ENV"
 	if err := os.Setenv(key, "旧值"); err != nil {
