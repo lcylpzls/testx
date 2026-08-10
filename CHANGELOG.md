@@ -1,5 +1,17 @@
 # 更新日志
 
+## [v0.4.0] - 2026-08-10
+
+### 新增
+
+- 泛型表格驱动 `RunCases`：每个用例生成 `name[序号]` 子测试；
+- 恐慌断言：`Panics` / `PanicsWithValue` / `NotPanics`；
+- 数值近似：`Approx`（容差非负，负容差按误用 Fatalf）。
+
+### 质量
+
+- 根包语句覆盖率 100%；race / vet / staticcheck / fuzz / govulncheck 全绿。
+
 ## [v0.3.0] - 2026-08-10
 
 ### 新增

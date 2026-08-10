@@ -24,6 +24,7 @@ func TestGreeting(t *testing.T) {
 - JSON 语义相等：忽略键序与空白，数字按数值精确比较（v0.2.0 起）；
 - 集合/字符串断言：Contains / NotContains / Subset / ElementsMatch
   （v0.3.0 起）；
+- 表格驱动 RunCases、恐慌断言与数值近似（v0.4.0 起）；
 - 输出捕获、临时环境与并发辅助（v0.5.0 起）；
 - 失败消息全部简体中文，断言基于可替换的 `TB` 接口。
 

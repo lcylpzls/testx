@@ -1,8 +1,8 @@
 # API 快照
 
-> 随版本更新。v0.3.0 快照如下；新版本发布后同步替换。
+> 随版本更新。v0.4.0 快照如下；新版本发布后同步替换。
 
-## v0.3.0
+## v0.4.0
 
 ### TB 接口
 
@@ -68,6 +68,20 @@ func ElementsMatch(t TB, listA, listB any)
 - `Subset`：list 包含 sublist 全部元素（多重性一致，顺序无关）；
 - `ElementsMatch`：两个集合元素一致（顺序无关、多重性一致）；
 - 不支持的容器类型视为断言误用（Fatalf）。
+
+### 表格驱动、恐慌与数值近似
+
+```go
+func RunCases[T any](t *testing.T, name string, cases []T, fn func(t *testing.T, c T))
+func Panics(t TB, fn func())
+func PanicsWithValue(t TB, want any, fn func())
+func NotPanics(t TB, fn func())
+func Approx(t TB, got, want, tolerance float64)
+```
+
+- `RunCases` 为每个用例生成 `name[序号]` 子测试；
+- `Panics` / `PanicsWithValue` / `NotPanics` 基于 recover；
+- `Approx` 断言 `|got-want| <= tolerance`，负容差视为误用。
 
 ### 语义
 

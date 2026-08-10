@@ -25,4 +25,15 @@ func TestExample(t *testing.T) {
 	testx.Contains(t, "你好世界", "世界")
 	testx.Subset(t, []int{1, 2, 3}, []int{3, 1})
 	testx.ElementsMatch(t, []string{"a", "b"}, []string{"b", "a"})
+	testx.Panics(t, func() { panic("boom") })
+	testx.Approx(t, 1.0, 1.01, 0.1)
+
+	testx.RunCases(t, "加法", []struct {
+		a, b, want int
+	}{
+		{1, 2, 3},
+		{2, 3, 5},
+	}, func(t *testing.T, c struct{ a, b, want int }) {
+		testx.Equal(t, c.a+c.b, c.want)
+	})
 }
