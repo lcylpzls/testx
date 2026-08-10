@@ -87,3 +87,15 @@ func RequireNotPanics(t TB, fn func()) { NotPanics(fatalTB{t}, fn) }
 func RequireApprox(t TB, got, want, tolerance float64) {
 	Approx(fatalTB{t}, got, want, tolerance)
 }
+
+// RequireGreater 断言 got 大于 want，失败时立即终止测试。
+func RequireGreater(t TB, got, want any) { Greater(fatalTB{t}, got, want) }
+
+// RequireGreaterOrEqual 断言 got 大于等于 want，失败时立即终止测试。
+func RequireGreaterOrEqual(t TB, got, want any) { GreaterOrEqual(fatalTB{t}, got, want) }
+
+// RequireLess 断言 got 小于 want，失败时立即终止测试。
+func RequireLess(t TB, got, want any) { Less(fatalTB{t}, got, want) }
+
+// RequireLessOrEqual 断言 got 小于等于 want，失败时立即终止测试。
+func RequireLessOrEqual(t TB, got, want any) { LessOrEqual(fatalTB{t}, got, want) }

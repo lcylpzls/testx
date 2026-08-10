@@ -170,3 +170,78 @@ func formatValue(v any) string {
 	}
 	return fmt.Sprintf("%#v", v)
 }
+
+// Greater 断言 got 大于 want（仅支持数值类型）。
+func Greater(t TB, got, want any) {
+	t.Helper()
+	if cmp, ok := compareNumber(got, want); !ok {
+		t.Errorf("Greater 仅支持数值类型，得到 %T 与 %T", got, want)
+	} else if cmp <= 0 {
+		t.Errorf("期望 %s 大于 %s", formatValue(got), formatValue(want))
+	}
+}
+
+// GreaterOrEqual 断言 got 大于等于 want（仅支持数值类型）。
+func GreaterOrEqual(t TB, got, want any) {
+	t.Helper()
+	if cmp, ok := compareNumber(got, want); !ok {
+		t.Errorf("GreaterOrEqual 仅支持数值类型，得到 %T 与 %T", got, want)
+	} else if cmp < 0 {
+		t.Errorf("期望 %s 大于等于 %s", formatValue(got), formatValue(want))
+	}
+}
+
+// Less 断言 got 小于 want（仅支持数值类型）。
+func Less(t TB, got, want any) {
+	t.Helper()
+	if cmp, ok := compareNumber(got, want); !ok {
+		t.Errorf("Less 仅支持数值类型，得到 %T 与 %T", got, want)
+	} else if cmp >= 0 {
+		t.Errorf("期望 %s 小于 %s", formatValue(got), formatValue(want))
+	}
+}
+
+// LessOrEqual 断言 got 小于等于 want（仅支持数值类型）。
+func LessOrEqual(t TB, got, want any) {
+	t.Helper()
+	if cmp, ok := compareNumber(got, want); !ok {
+		t.Errorf("LessOrEqual 仅支持数值类型，得到 %T 与 %T", got, want)
+	} else if cmp > 0 {
+		t.Errorf("期望 %s 小于等于 %s", formatValue(got), formatValue(want))
+	}
+}
+
+// compareNumber 比较两个数值，返回 -1/0/1；非数值返回 ok=false。
+func compareNumber(a, b any) (int, bool) {
+	af, aok := numericValue(a)
+	bf, bok := numericValue(b)
+	if !aok || !bok {
+		return 0, false
+	}
+	switch {
+	case af < bf:
+		return -1, true
+	case af > bf:
+		return 1, true
+	default:
+		return 0, true
+	}
+}
+
+// numericValue 将数值类型归一为 float64；非数值返回 ok=false。
+func numericValue(v any) (float64, bool) {
+	rv := reflect.ValueOf(v)
+	if !rv.IsValid() {
+		return 0, false
+	}
+	switch rv.Kind() {
+	case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:
+		return float64(rv.Int()), true
+	case reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64, reflect.Uintptr:
+		return float64(rv.Uint()), true
+	case reflect.Float32, reflect.Float64:
+		return rv.Float(), true
+	default:
+		return 0, false
+	}
+}

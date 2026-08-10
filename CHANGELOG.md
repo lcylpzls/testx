@@ -1,5 +1,17 @@
 # 更新日志
 
+## [v1.4.0] - 2026-08-10
+
+### 新增
+
+- 数值比较断言：`Greater` / `GreaterOrEqual` / `Less` /
+  `LessOrEqual` 及对应 `Require*` 版本（支持全部整数、无符号与浮点类型，
+  非数值输入按失败处理）。
+
+### 质量
+
+- race / vet / staticcheck / govulncheck 全绿；覆盖率维持测试基座自身基线。
+
 ## [v1.3.0] - 2026-08-10
 
 ### 新增
