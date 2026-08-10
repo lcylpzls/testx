@@ -3,7 +3,7 @@
 轻量、零魔法的 Go 测试断言与辅助库：与 errx 结构化错误天然打通，
 消除家族各库重复编写 fake/helper 的问题。
 
-[![Go Version](https://img.shields.io/badge/Go-%3E%3D1.26-00ADD8?style=flat&logo=go)](https://go.dev/)
+[![Go Version](https://img.shields.io/badge/Go-%3E%3D1.26.5-00ADD8?style=flat&logo=go)](https://go.dev/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![CI](https://github.com/lcylpzls/testx/actions/workflows/ci.yml/badge.svg)](https://github.com/lcylpzls/testx/actions/workflows/ci.yml)
 
