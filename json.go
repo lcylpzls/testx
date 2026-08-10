@@ -8,7 +8,17 @@ import (
 	"io"
 	"math/big"
 	"reflect"
+
+	"github.com/lcylpzls/errx"
 )
+
+// CodeInvalidJSON JSON 解析失败（解码/多余内容）。
+const CodeInvalidJSON errx.Code = "TESTX_INVALID_JSON"
+
+func init() {
+	errx.RegisterCode(CodeInvalidJSON, "JSON 解析失败")
+	errx.RegisterCodeKind(CodeInvalidJSON, errx.KindInvalid)
+}
 
 // JSONEqual 断言两个 JSON（string/[]byte）语义相等：
 // 忽略键序与空白，数字按数值比较（1 与 1.0 相等）。
@@ -35,7 +45,7 @@ func JSONEqual(t TB, got, want any) {
 func decodeJSON(v any) (any, error) {
 	data, ok := jsonData(v)
 	if !ok {
-		return nil, fmt.Errorf("仅支持 string/[]byte，当前类型 %T", v)
+		return nil, errx.NewCodef(CodeInvalidJSON, "仅支持 string/[]byte，当前类型 %T", v)
 	}
 	dec := json.NewDecoder(bytes.NewReader(data))
 	dec.UseNumber()
@@ -46,7 +56,7 @@ func decodeJSON(v any) (any, error) {
 	var extra any
 	if err := dec.Decode(&extra); !errors.Is(err, io.EOF) {
 		if err == nil {
-			return nil, errors.New("JSON 后存在多余内容")
+			return nil, errx.NewCode(CodeInvalidJSON, "JSON 后存在多余内容")
 		}
 		return nil, err
 	}

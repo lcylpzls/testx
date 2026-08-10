@@ -1,5 +1,15 @@
 # 更新日志
 
+## [v1.4.1] - 2026-08-10
+
+### 变更
+
+- JSON 解析辅助错误统一 errx 化（新增 CodeInvalidJSON），对外错误带结构化 code/kind，消息保持原语义。
+
+### 质量
+
+- 覆盖率维持基线；race / vet / staticcheck / govulncheck 全绿。
+
 ## [v1.4.0] - 2026-08-10
 
 ### 新增
