@@ -9,4 +9,6 @@ type TB interface {
 	Errorf(format string, args ...any)
 	// Fatalf 记录失败并立即终止（仅用于断言误用）。
 	Fatalf(format string, args ...any)
+	// Cleanup 注册测试结束时的清理函数。
+	Cleanup(func())
 }

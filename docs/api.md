@@ -1,8 +1,8 @@
 # API 快照
 
-> 随版本更新。v0.4.0 快照如下；新版本发布后同步替换。
+> 随版本更新。v0.5.0 快照如下；新版本发布后同步替换。
 
-## v0.4.0
+## v0.5.0
 
 ### TB 接口
 
@@ -11,6 +11,7 @@ type TB interface {
     Helper()
     Errorf(format string, args ...any)
     Fatalf(format string, args ...any)
+    Cleanup(func())
 }
 ```
 
@@ -82,6 +83,21 @@ func Approx(t TB, got, want, tolerance float64)
 - `RunCases` 为每个用例生成 `name[序号]` 子测试；
 - `Panics` / `PanicsWithValue` / `NotPanics` 基于 recover；
 - `Approx` 断言 `|got-want| <= tolerance`，负容差视为误用。
+
+### 辅助
+
+```go
+func CaptureStdout(fn func()) string
+func CaptureStderr(fn func()) string
+func TempEnv(t TB, envs ...string)
+func Concurrently(t TB, n int, fn func())
+```
+
+- `CaptureStdout` / `CaptureStderr`：临时替换输出流，执行后恢复；
+  仅捕获使用 os.Stdout/os.Stderr 全局变量的输出，不可用于并行测试；
+- `TempEnv`：成对 KEY/VALUE 设置环境变量，测试结束时恢复原值
+  （不存在的键恢复为未设置）；
+- `Concurrently`：并发运行 fn 共 n 次并等待完成，配合 `-race` 检测竞态。
 
 ### 语义
 

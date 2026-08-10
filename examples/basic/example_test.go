@@ -2,6 +2,7 @@ package basic_test
 
 import (
 	"errors"
+	"fmt"
 	"testing"
 
 	"github.com/lcylpzls/errx"
@@ -36,4 +37,11 @@ func TestExample(t *testing.T) {
 	}, func(t *testing.T, c struct{ a, b, want int }) {
 		testx.Equal(t, c.a+c.b, c.want)
 	})
+
+	got := testx.CaptureStdout(func() {
+		fmt.Print("捕获")
+	})
+	testx.Equal(t, got, "捕获")
+	testx.TempEnv(t, "EXAMPLE_ENV", "值")
+	testx.Concurrently(t, 4, func() {})
 }

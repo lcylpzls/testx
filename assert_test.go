@@ -190,6 +190,8 @@ func (f *fakeTB) Fatalf(format string, args ...any) {
 	f.fatals = append(f.fatals, fmt.Sprintf(format, args...))
 }
 
+func (f *fakeTB) Cleanup(func()) {}
+
 func (f *fakeTB) failed() bool {
 	return len(f.errors) > 0 || len(f.fatals) > 0
 }

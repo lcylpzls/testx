@@ -1,5 +1,20 @@
 # 更新日志
 
+## [v0.5.0] - 2026-08-10
+
+### 新增
+
+- 输出捕获：`CaptureStdout` / `CaptureStderr`（临时替换输出流，
+  panic 时也恢复）；
+- 临时环境：`TempEnv` 成对设置并在测试结束恢复原值；
+- 并发辅助：`Concurrently` 并发运行并等待完成，配合 `-race` 检测竞态；
+- TB 接口新增 `Cleanup`；
+- 基准测试与 `BENCHMARKS.md`（Equal 通过路径零分配）。
+
+### 质量
+
+- 根包语句覆盖率 100%；race / vet / staticcheck / fuzz / govulncheck 全绿。
+
 ## [v0.4.0] - 2026-08-10
 
 ### 新增

@@ -8,7 +8,7 @@
 | v0.2.0 | errx 断言（ErrCode/ErrKind/ErrFields）与 JSON 语义相等 | 完成 |
 | v0.3.0 | 集合/字符串断言：Contains/NotContains/Subset/ElementsMatch | 完成 |
 | v0.4.0 | 表格驱动 RunCases、Panics/NotPanics、数值近似 Approx | 完成 |
-| v0.5.0 | 捕获/临时环境/并发辅助与基准 | 计划 |
+| v0.5.0 | 捕获/临时环境/并发辅助与基准 | 完成 |
 | v0.6.0+ | 终审、自我检查、打磨至 1.0 候选 | 计划 |
 
 ## 完成定义（Definition of Done）
