@@ -1,2 +1,4 @@
 github.com/lcylpzls/errx v1.4.0 h1:CdlMZuf2F49PCyUkRROf11i1gHcAI38GTG+kxMAGQWI=
 github.com/lcylpzls/errx v1.4.0/go.mod h1:+GcqVS4+6iuHvCELjwpsc1RKrdEtSNz00xq0lFrgdgI=
+github.com/lcylpzls/testx v1.3.0 h1:+0Y+qc8aVXrPiPHWmOJHag2Ab9tqTnu0L50EbVUxhXU=
+github.com/lcylpzls/testx v1.3.0/go.mod h1:fSIAIHupdm3N+YU1CqHxsfXUb3z8bz5NF6AXDPzMha0=
