@@ -101,7 +101,7 @@ func Concurrently(t TB, n int, fn func())
 
 ### 依赖约定（v1.0.0 起冻结）
 
-- 仅依赖 `errx v1.3.x`（1.x），无 0.x 依赖；
+- 仅依赖 `errx v1.4.x`（1.x），无 0.x 依赖；
 - 冻结后破坏性 API 变更需提升主版本。
 
 ### 语义
