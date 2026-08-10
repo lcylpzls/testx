@@ -1,5 +1,18 @@
 # 更新日志
 
+## [v1.3.0] - 2026-08-10
+
+### 新增
+
+- `testx/logx` 可选子包：日志捕获器 `New` / `Snapshot`（实现完整
+  logx.Logger）与断言 `AssertLogged` / `AssertLoggedContains`，
+  供家族各库测试日志行为。
+
+### 质量
+
+- 根包与子包覆盖率均 100%；race / vet / staticcheck / fuzz /
+  govulncheck 全绿。
+
 ## [v1.2.4] - 2026-08-10
 
 ### 变更
