@@ -27,18 +27,12 @@ func TestGreeting(t *testing.T) {
   （v0.3.0 起）；
 - 表格驱动 RunCases、恐慌断言与数值近似（v0.4.0 起）；
 - 输出捕获、临时环境与并发辅助（v0.5.0 起）；
-- `testx/logx` 日志捕获与断言子包（v1.3.0 起）；
 - `Require*` 致命断言变体：失败立即终止测试（v1.2.0 起）；
 - 失败消息全部简体中文，断言基于可替换的 `TB` 接口。
 
 ## 文档
 
-- [docs/research.md](docs/research.md) — 竞品调研与取舍
-- [docs/design.md](docs/design.md) — 设计
 - [docs/architecture.md](docs/architecture.md) — 架构
-- [docs/api.md](docs/api.md) — API 快照
-- [docs/final-review.md](docs/final-review.md) — 1.0 候选终审
-- [docs/roadmap.md](docs/roadmap.md) — 路线图
 
 ## License
 
